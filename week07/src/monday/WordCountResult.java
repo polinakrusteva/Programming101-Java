@@ -7,28 +7,28 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class WordCountResult {
-
+#some
 	private int words;
 	private int lines;
 	private int characters;
-	
+
 	public int getWords(String str) {
 		String[] subStr = str.split(" ");
 		return subStr.length;
 	}
-	
+
 	public void setWords(int words){
 		this.words += words;
 	}
-	
+
 	public int getLines(){
 		return this.lines;
 	}
-	
+
 	public void setLines(int lines){
 		this.lines = lines;
 	}
-	
+
 	public int getCharacters(String str) {
 		String[] subStr = str.split(" ");
 		int carCount = 0;
@@ -37,11 +37,11 @@ public class WordCountResult {
 		}
 		return carCount;
 	}
-	
+
 	public void setCharacters(int characters){
 		this.characters += characters;
 	}
-	
+
 	public WordCountResult wordCount(Path path) throws IOException{
 		BufferedReader reader = Files.newBufferedReader(path);
 		WordCountResult temp = new WordCountResult();
@@ -57,7 +57,7 @@ public class WordCountResult {
 		reader.close();
 		return temp;
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		WordCountResult testCount = new WordCountResult();
 		testCount.wordCount(Paths.get("/home/polinakk/Desktop/untitled2.txt"));
