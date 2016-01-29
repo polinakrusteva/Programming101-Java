@@ -1,4 +1,5 @@
 package junit;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -6,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Test {
 
 	Class<?> expected() default None.class;
+
 	long timeout() default 0L;
-	
+
 }
