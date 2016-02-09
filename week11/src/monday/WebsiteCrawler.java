@@ -53,9 +53,6 @@ public class WebsiteCrawler {
 	public static void crawl(String url, String needle) throws ClientProtocolException, IOException {
 		String content = getContent(url);
 		List<String> links = getAllLinks(content);
-//		for (String link : links) {
-//			System.out.println(link);
-//		}
 		HashSet<String> visited = new HashSet<>();
 		if (content.contains(needle)) {
 			System.out.println(url);
@@ -65,7 +62,6 @@ public class WebsiteCrawler {
 			if (!fmiSitePattern.matcher(link).matches()) {
 				continue;
 			}
-			// System.out.println(link);
 			if (visited.contains(link)) {
 				continue;
 			}
