@@ -3,11 +3,15 @@ package monday;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.sound.sampled.Port;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,6 +21,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 public class WebsiteCrawler {
+
+	private static Pattern fmiSitePattern = Pattern.compile("^http://www.fmi.uni-sofia.bg/.*$");
 
 	private static String getContent(String url) throws ClientProtocolException, IOException {
 		CloseableHttpClient client = HttpClients.createDefault();
@@ -44,20 +50,24 @@ public class WebsiteCrawler {
 		return resultList;
 	}
 
-	
 	public static void crawl(String url, String needle) throws ClientProtocolException, IOException {
 		String content = getContent(url);
 		List<String> links = getAllLinks(content);
-		System.out.println(links);
+//		for (String link : links) {
+//			System.out.println(link);
+//		}
 		HashSet<String> visited = new HashSet<>();
 		if (content.contains(needle)) {
 			System.out.println(url);
 			return;
 		}
 		for (String link : links) {
-			//System.out.println(link);
+			if (!fmiSitePattern.matcher(link).matches()) {
+				continue;
+			}
+			// System.out.println(link);
 			if (visited.contains(link)) {
-				return;
+				continue;
 			}
 			visited.add(link);
 			content = getContent(link);
@@ -69,6 +79,6 @@ public class WebsiteCrawler {
 	}
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
-		crawl("http://www.fmi.uni-sofia.bg/", "хффнф");
+		crawl("http://www.fmi.uni-sofia.bg/", "показани");
 	}
 }
