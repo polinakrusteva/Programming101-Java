@@ -7,7 +7,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class WordCountResult {
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> cf18efcc35cb8db99b55d80b973475ba893b2a0e
 	private int words;
 	private int lines;
 	private int characters;
